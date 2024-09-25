@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload and Download</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="upload-section">
+        <h2>⏫上传区域</h2>
+        <div class="upload-container">
+            <div class="upload-column">
+                <h3>上传一个 ZIP 文件 到图片文件夹📁:</h2>
+                <form id="upload-form" method="post" action="/upload_zip" enctype="multipart/form-data">
+                    <label for="file">Select ZIP file:</label>
+                    <input type="file" name="file" id="file">
+                    
+                    <input type="submit" value="Upload">
+                </form>
+                <div id="progress-container">
+                    <div id="progress-bar">0%</div>
+                </div>
+                <div id="feedback"></div>
+            </div>
+            <div class="upload-column">
+                <h3>上传一个 .safetensors 文件 到 comfyUI 📁:</h2>
+                <form id="upload-form2" method="post" action="/upload_lora" enctype="multipart/form-data">
+                    <label for="file">Select lora file:</label>
+                    <input type="file" name="file" id="file">
+                    
+                    <input type="submit" value="Upload">
+                </form>
+                <div id="progress-container2">
+                    <div id="progress-bar2">0%</div>
+                </div>
+                <div id="feedback2"></div>  
+            </div>
+        </div>
+    </div>
+
+    <div class="file-browser-section">
+        <h2>👀浏览区域</h2>
+        <h4>当前浏览路径： <p id="current-path" style="display: inline;">/data4/lili/data</p> </h4>
+        <button id="back-button">返回</button>
+        <div class="container">
+            <div class="column">
+                <h3>文件夹(左键浏览下一级，右键下载)</h3>
+                <ul id="folder-list"></ul>
+            </div>
+            <div class="column">
+                <h3>文件(左键预览，右键下载)</h3>
+                <ul id="file-list"></ul>
+            </div>
+            <div class="column"> 
+                <h3>预览(仅支持图像和文本)</h3>
+                <div id="file-preview"></div> <!-- 用于显示文件内容 -->
+            </div>
+        </div>
+    </div> 
+
+    <div id="image-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+
+                <input type="text" id="image-filter" placeholder="Filter images by filename...">
+
+            <!-- 添加筛选输入框 -->
+            
+            
+            <div id="image-gallery"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
